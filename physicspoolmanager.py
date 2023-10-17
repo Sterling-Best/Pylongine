@@ -6,7 +6,7 @@ class PhysicsPoolManager:
 
     _instance = None
 
-    componentPools: dict
+    component_pools: dict
 
     def __new__(cls):
         # Setup for Singleton
@@ -21,29 +21,25 @@ class PhysicsPoolManager:
             return
         self._initialized = True
         # "self" attributes for the singleton
-        self.componentPools ={}
+        self.component_pools ={}
 
-    def createPool(self, a_poolname: str) -> None:
-        self.addPool(PhysicsComponentPool(), a_poolname)
+    def create_pool(self, a_pool_name: str) -> None:
+        self.add_pool(PhysicsComponentPool(), a_pool_name)
 
     #TODO: Should you ever add a pool or would it just be created?
     #Should this be public?
-    def addPool(self, a_pool: PhysicsComponentPool, a_poolname: str) -> None:
-        self.componentPools[a_poolname] = a_pool
+    def add_pool(self, a_pool: PhysicsComponentPool, a_pool_name: str) -> None:
+        self.component_pools[a_pool_name] = a_pool
 
-    def removePool(self, a_poolname: str) -> None:
-        self.componentPools[a_poolname].pop()
+    def remove_pool(self, a_pool_name: str) -> None:
+        self.component_pools[a_pool_name].pop()
 
     def iterate_pools(self, a_callback: Callable) -> None:
-        for key, pool in self.componentPools.items():
-            pool.iteratePool(a_callback)
+        for key, pool in self.component_pools.items():
+            pool.iterate_pool(a_callback)
 
-    def iterate_specific_pool(self, a_callback: Callable, a_poolname: str) -> None:
-        self.componentPools[a_poolname].iteratePool(a_callback)
+    def iterate_specific_pool(self, a_callback: Callable, a_pool_name: str) -> None:
+        self.component_pools[a_pool_name].iterate_pool(a_callback)
 
-    def request_create_component(self, x: float = 0, y: float = 0, a_poolname ="Default") -> PhysicsComponent:
-        return self.componentPools[a_poolname].create_component(x, y)
-
-
-
-
+    def request_create_component(self, x: float = 0, y: float = 0, a_pool_name ="Default") -> PhysicsComponent:
+        return self.component_pools[a_pool_name].create_component(x, y)

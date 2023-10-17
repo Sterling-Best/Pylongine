@@ -27,7 +27,7 @@ class PhysicsController:
         self.setup()
 
     def setup(self):
-        self.physics_pool_manager.createPool("default")
+        self.physics_pool_manager.create_pool("default")
 
     def update_physics(self):
         self.physics_pool_manager.iterate_pools(self.physics_engine.update_physics)

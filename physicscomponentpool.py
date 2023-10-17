@@ -10,13 +10,13 @@ class PhysicsComponentPool:
     def __init__(self):
         self.pool = []
 
-    def getPool(self) -> list:
+    def get_pool(self) -> list:
         return self.pool
 
-    def addComponent(self, component: PhysicsComponent) -> None:
+    def add_component(self, component: PhysicsComponent) -> None:
         self.pool.append(component)
 
-    def removeComponent(self, component: PhysicsComponent) -> None:
+    def remove_component(self, component: PhysicsComponent) -> None:
         """
         Remove component from pool.
 
@@ -24,16 +24,16 @@ class PhysicsComponentPool:
         :param component:
         :return:
         """
-        targetIndex = self.pool.index(component)
-        self.pool[targetIndex], self.pool[-1] = self.pool[-1], self.pool[targetIndex]
+        target_index = self.pool.index(component)
+        self.pool[target_index], self.pool[-1] = self.pool[-1], self.pool[target_index]
         self.pool.pop()
 
     def create_component(self, x: float = 0, y: float = 0) -> None:
-        newComponent= PhysicsComponent(Vector2D([x, y]))
-        self.addComponent(newComponent)
-        return newComponent
+        new_component = PhysicsComponent(Vector2D([x, y]))
+        self.add_component(new_component)
+        return new_component
 
-    def iteratePool(self, a_callback: Callable):
+    def iterate_pool(self, a_callback: Callable):
         for component in self.pool:
             a_callback(component)
 
