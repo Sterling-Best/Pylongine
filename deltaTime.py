@@ -15,7 +15,7 @@ class DeltaTime:
     def set(self, newDeltaTime: float):
         self.deltaTime = newDeltaTime
 
-    def setStartFrame(self, a_startTime):
+    def set_start_frame(self, a_startTime):
         self.startTime = a_startTime
 
     def calculate(self, a_time: float):

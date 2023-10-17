@@ -8,12 +8,12 @@ from physicscomponent import PhysicsComponent
 
 class EngineController:
 
-    targetFrameRate: int = 60
+    target_frame_rate: int = 60
 
-    deltaTime: DeltaTime
-    fixedDeltaTime: DeltaTime
+    delta_time: DeltaTime
+    fixed_delta_time: DeltaTime
 
-    physicsController: PhysicsController
+    physics_controller: PhysicsController
 
     def __init__(self):
         pygame.init()
@@ -21,10 +21,10 @@ class EngineController:
         # screen settings
         self.width, self.height = 1280, 720
         self.screen = pygame.display.set_mode((self.width, self.height))
-        self.targetFrameTime = 1 / self.targetFrameRate
-        self.physicsController = PhysicsController()
-        self.deltaTime = DeltaTime()
-        self.fixedDeltaTime = DeltaTime()
+        self.target_frame_time = 1 / self.target_frame_rate
+        self.physics_controller = PhysicsController()
+        self.delta_time = DeltaTime()
+        self.fixed_delta_time = DeltaTime()
         self.component = PhysicsComponent()
 
     def run(self) -> None:
@@ -39,16 +39,16 @@ class EngineController:
         self.start()
         #Environment Running Loop
         while self.running:
-            self.startDeltaTime()
+            self.start_delta_time()
             #Environment Loop Main logic
             self.update()
             #Fixed
-            while self.fixedDeltaTime.get() >= self.targetFrameTime:
-                self.fixedUpdate()
-                self.fixedDeltaTime.set(self.fixedDeltaTime.get() - self.targetFrameTime)
-            self.lateUpdate()
-            self.renderUpdate()
-            self.calculateDeltaTime()
+            while self.fixed_delta_time.get() >= self.target_frame_time:
+                self.fixed_update()
+                self.fixed_delta_time.set(self.fixed_delta_time.get() - self.target_frame_time)
+            self.late_update()
+            self.render_update()
+            self.calculate_delta_time()
         #Exit Environment
         self.end()
 
@@ -57,19 +57,19 @@ class EngineController:
 
     def start(self) -> None:
         self.running = True
-        baseStartTime = time.time()
-        self.deltaTime.setStartFrame(baseStartTime)
-        self.fixedDeltaTime.setStartFrame(baseStartTime)
-        initializationTime = time.time()
-        self.deltaTime.calculate(initializationTime)
-        self.fixedDeltaTime.calculate(initializationTime)
-        self.component = self.physicsController.createComponent(100, 100)
+        base_start_time = time.time()
+        self.delta_time.set_start_frame(base_start_time)
+        self.fixed_delta_time.set_start_frame(base_start_time)
+        initialization_time = time.time()
+        self.delta_time.calculate(initialization_time)
+        self.fixed_delta_time.calculate(initialization_time)
+        self.component = self.physics_controller.createComponent(100, 100)
 
     def update(self):
         pass
 
-    def fixedUpdate(self):
-        self.physicsController.updatePhysics()
+    def fixed_update(self):
+        self.physics_controller.update_physics()
         self.screen.fill((128, 128, 128))
         pygame.draw.circle(self.screen, (200, 0, 0), (self.component.position.x, self.component.position.y), 50)
         pygame.display.flip()
@@ -77,22 +77,22 @@ class EngineController:
         #TODO: Apply physics update for physics update simulator here
         #TODO: Apply fixed update for all sceneObjects here
 
-    def lateUpdate(self):
+    def late_update(self):
         pass
 
-    def renderUpdate(self) -> None:
+    def render_update(self) -> None:
         pass
 
     def end(self):
         pass
 
-    def startDeltaTime(self):
+    def start_delta_time(self):
         # start keeping track of deltaTime
-        baseStartTime = time.time()  # calculate time for deltaTime and fixedDelta time so they are sinked
+        base_start_time = time.time()  # calculate time for deltaTime and fixedDelta time so they are sinked
         # print("Base Start Time: " + str(baseStartTime))
-        self.deltaTime.setStartFrame(baseStartTime)
-        if self.fixedDeltaTime.get() >= self.targetFrameTime:
-            self.fixedDeltaTime.setStartFrame(baseStartTime)
+        self.delta_time.set_start_frame(base_start_time)
+        if self.fixed_delta_time.get() >= self.target_frame_time:
+            self.fixed_delta_time.set_start_frame(base_start_time)
             # print("fixedUpdate Loop")
             # print("StartTime " + str(self.fixedDeltaTime.startTime))
             # print("fixedDeltatime " + str(self.fixedDeltaTime.get()))
@@ -100,11 +100,11 @@ class EngineController:
             # print("TargetFrameTime " + str(self.targetFrameTime + baseStartTime))
             # print("New fixedDeltaTime " + str(self.fixedDeltaTime.get() - self.targetFrameTime))
 
-    def calculateDeltaTime(self):
+    def calculate_delta_time(self):
         # calculate deltaTime this frame
-        endTime = time.time()
-        self.deltaTime.calculate(endTime)
-        self.fixedDeltaTime.set(self.fixedDeltaTime.deltaTime + self.deltaTime.get())
+        end_time = time.time()
+        self.delta_time.calculate(end_time)
+        self.fixed_delta_time.set(self.fixed_delta_time.deltaTime + self.delta_time.get())
         # if self.deltaTime.get() > 0:
         #     print("Main Environment Loop")
         #     print("Fixed Start Time " + str(self.fixedDeltaTime.startTime))

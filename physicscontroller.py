@@ -29,7 +29,7 @@ class PhysicsController:
     def setup(self):
         self.physicsPoolManager.createPool("default")
 
-    def updatePhysics(self):
+    def update_physics(self):
         self.physicsPoolManager.iteratePools(self.physicsEngine.updatePhysics)
 
     def updateSpecificPhysics(self, a_physicsPoolName: str):

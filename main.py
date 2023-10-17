@@ -13,7 +13,7 @@ def print_hi(name):
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     print_hi('PyCharm')
-    engineController = EngineController()
-    engineController.run()
+    engine_controller = EngineController()
+    engine_controller.run()
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
