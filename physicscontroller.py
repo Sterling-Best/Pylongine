@@ -7,8 +7,8 @@ class PhysicsController:
 
     _instance = None
 
-    physicsEngine: PhysicsEngine
-    physicsPoolManager: PhysicsPoolManager
+    physics_engine: PhysicsEngine
+    physics_pool_manager: PhysicsPoolManager
 
     def __new__(cls):
         # Setup for Singleton
@@ -22,21 +22,21 @@ class PhysicsController:
             return
         self._initialized = True
         #Class Variables
-        self.physicsEngine = PhysicsEngine()
-        self.physicsPoolManager = PhysicsPoolManager()
+        self.physics_engine = PhysicsEngine()
+        self.physics_pool_manager = PhysicsPoolManager()
         self.setup()
 
     def setup(self):
-        self.physicsPoolManager.createPool("default")
+        self.physics_pool_manager.createPool("default")
 
     def update_physics(self):
-        self.physicsPoolManager.iteratePools(self.physicsEngine.update_physics)
+        self.physics_pool_manager.iterate_pools(self.physics_engine.update_physics)
 
-    def updateSpecificPhysics(self, a_physicsPoolName: str):
-        self.physicsPoolManager.iterateSpecificPool(self.physicsEngine.update_physics(), a_physicsPoolName)
+    def update_specific_physics(self, a_physics_pool_name: str):
+        self.physics_pool_manager.iterate_specific_pool(self.physics_engine.update_physics(), a_physics_pool_name)
 
-    def createComponent(self, x: float = 0, y: float = 0, a_poolname: str = "default") -> PhysicsComponent:
-        return self.physicsPoolManager.requestCreateComponent(x, y, a_poolname)
+    def create_component(self, x: float = 0, y: float = 0, a_pool_name: str = "default") -> PhysicsComponent:
+        return self.physics_pool_manager.request_create_component(x, y, a_pool_name)
 
 
 

@@ -63,7 +63,7 @@ class EngineController:
         initialization_time = time.time()
         self.delta_time.calculate(initialization_time)
         self.fixed_delta_time.calculate(initialization_time)
-        self.component = self.physics_controller.createComponent(100, 100)
+        self.component = self.physics_controller.create_component(100, 100)
 
     def update(self):
         pass

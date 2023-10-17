@@ -34,15 +34,15 @@ class PhysicsPoolManager:
     def removePool(self, a_poolname: str) -> None:
         self.componentPools[a_poolname].pop()
 
-    def iteratePools(self, a_callback: Callable) -> None:
+    def iterate_pools(self, a_callback: Callable) -> None:
         for key, pool in self.componentPools.items():
             pool.iteratePool(a_callback)
 
-    def iterateSpecificPool(self, a_callback: Callable, a_poolname: str) -> None:
+    def iterate_specific_pool(self, a_callback: Callable, a_poolname: str) -> None:
         self.componentPools[a_poolname].iteratePool(a_callback)
 
-    def requestCreateComponent(self, x: float = 0, y: float = 0, a_poolname ="Default") -> PhysicsComponent:
-        return self.componentPools[a_poolname].createComponent(x, y)
+    def request_create_component(self, x: float = 0, y: float = 0, a_poolname ="Default") -> PhysicsComponent:
+        return self.componentPools[a_poolname].create_component(x, y)
 
 
 

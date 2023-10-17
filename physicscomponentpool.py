@@ -28,7 +28,7 @@ class PhysicsComponentPool:
         self.pool[targetIndex], self.pool[-1] = self.pool[-1], self.pool[targetIndex]
         self.pool.pop()
 
-    def createComponent(self, x: float = 0, y: float = 0) -> None:
+    def create_component(self, x: float = 0, y: float = 0) -> None:
         newComponent= PhysicsComponent(Vector2D([x, y]))
         self.addComponent(newComponent)
         return newComponent
