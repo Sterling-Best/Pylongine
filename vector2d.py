@@ -14,8 +14,16 @@ class Vector2D:
     def y(self):
         return self.vector[1]
 
-    def set_y(self, a_newy: float):
-        self.vector[1] = a_newy
+    def set(self, a_new_x: float, a_new_y: float):
+        self.vector[0], self.vector[1] = a_new_x, a_new_y
+
+    def set_x(self, a_new_x: float):
+        self.vector[0] = a_new_x
+
+    def set_y(self, a_new_y: float):
+        self.vector[1] = a_new_y
+
+
 
 
 

@@ -16,12 +16,12 @@ class SceneObject(ABC):
     def update(self):
         pass
 
-    def fixedUpdate(self):
+    def fixed_update(self):
         pass
 
-    def lateUpdate(self):
+    def late_update(self):
         pass
 
-    def renderUpdate(self):
+    def render_update(self):
         pass
 
