@@ -2,23 +2,23 @@ import time
 
 class DeltaTime:
 
-    deltaTime: float
-    startTime: float
+    delta_time: float
+    start_time: float
 
     def __init__(self):
-        self.startTime = 0.0
-        self.deltaTime = time.time()
+        self.start_time = 0.0
+        self.delta_time = time.time()
 
     def get(self):
-        return self.deltaTime
+        return self.delta_time
 
-    def set(self, newDeltaTime: float):
-        self.deltaTime = newDeltaTime
+    def set(self, a_new_delta_time: float):
+        self.delta_time = a_new_delta_time
 
-    def set_start_frame(self, a_startTime):
-        self.startTime = a_startTime
+    def set_start_frame(self, a_start_time: float):
+        self.start_time = a_start_time
 
     def calculate(self, a_time: float):
-        self.deltaTime = a_time - self.startTime
+        self.delta_time = a_time - self.start_time
 
 

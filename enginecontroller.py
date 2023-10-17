@@ -104,7 +104,7 @@ class EngineController:
         # calculate deltaTime this frame
         end_time = time.time()
         self.delta_time.calculate(end_time)
-        self.fixed_delta_time.set(self.fixed_delta_time.deltaTime + self.delta_time.get())
+        self.fixed_delta_time.set(self.fixed_delta_time.delta_time + self.delta_time.get())
         # if self.deltaTime.get() > 0:
         #     print("Main Environment Loop")
         #     print("Fixed Start Time " + str(self.fixedDeltaTime.startTime))
