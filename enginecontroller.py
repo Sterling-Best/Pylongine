@@ -8,7 +8,6 @@ from physicscomponent import PhysicsComponent
 
 class EngineController:
 
-
     targetFrameRate: int = 60
 
     deltaTime: DeltaTime
@@ -28,8 +27,6 @@ class EngineController:
         self.fixedDeltaTime = DeltaTime()
         self.component = PhysicsComponent()
 
-
-
     def run(self) -> None:
         """
         EngineController.run()
@@ -37,45 +34,21 @@ class EngineController:
         Main code logic for initializing and looping the environment/scene.
 
         """
-        #run() variables
-        baseStartTime = 0.0
         #Environment Initialization
         self.initialize()
         self.start()
         #Environment Running Loop
         while self.running:
-            #start keeping track of deltaTime
-            baseStartTime = time.time() #calculate time for deltaTime and fixedDelta time so they are sinked
-            #print("Base Start Time: " + str(baseStartTime))
-            self.deltaTime.setStartFrame(baseStartTime)
-            if self.fixedDeltaTime.get() >= self.targetFrameTime:
-                self.fixedDeltaTime.setStartFrame(baseStartTime)
-            #Check if Fixed Update Should be started
+            self.startDeltaTime()
             #Environment Loop Main logic
             self.update()
+            #Fixed
             while self.fixedDeltaTime.get() >= self.targetFrameTime:
                 self.fixedUpdate()
                 self.fixedDeltaTime.set(self.fixedDeltaTime.get() - self.targetFrameTime)
-                # print("fixedUpdate Loop")
-                # print("StartTime " + str(self.fixedDeltaTime.startTime))
-                # print("fixedDeltatime " + str(self.fixedDeltaTime.get()))
-                # print("DeltaTime " + str(self.deltaTime.get()))
-                # print("TargetFrameTime " + str(self.targetFrameTime + baseStartTime))
-                # print("New fixedDeltaTime " + str(self.fixedDeltaTime.get() - self.targetFrameTime))
             self.lateUpdate()
             self.renderUpdate()
-            #calculate deltaTime this frame
-            endTime = time.time()
-            self.deltaTime.calculate(endTime)
-            self.fixedDeltaTime.set(self.fixedDeltaTime.deltaTime + self.deltaTime.get())
-            # if self.deltaTime.get() > 0:
-            #     print("Main Environment Loop")
-            #     print("Fixed Start Time " + str(self.fixedDeltaTime.startTime))
-            #     print("fixed Deltatime " + str(self.fixedDeltaTime.deltaTime + self.deltaTime.deltaTime))
-            #     print("DeltaTime Start " + str(self.deltaTime.startTime))
-            #     print("DeltaTime " + str(self.deltaTime.get()))
-            #     print("EndTime " + str(endTime))
-            #print(fixedDeltaTime.get())
+            self.calculateDeltaTime()
         #Exit Environment
         self.end()
 
@@ -112,3 +85,30 @@ class EngineController:
 
     def end(self):
         pass
+
+    def startDeltaTime(self):
+        # start keeping track of deltaTime
+        baseStartTime = time.time()  # calculate time for deltaTime and fixedDelta time so they are sinked
+        # print("Base Start Time: " + str(baseStartTime))
+        self.deltaTime.setStartFrame(baseStartTime)
+        if self.fixedDeltaTime.get() >= self.targetFrameTime:
+            self.fixedDeltaTime.setStartFrame(baseStartTime)
+            # print("fixedUpdate Loop")
+            # print("StartTime " + str(self.fixedDeltaTime.startTime))
+            # print("fixedDeltatime " + str(self.fixedDeltaTime.get()))
+            # print("DeltaTime " + str(self.deltaTime.get()))
+            # print("TargetFrameTime " + str(self.targetFrameTime + baseStartTime))
+            # print("New fixedDeltaTime " + str(self.fixedDeltaTime.get() - self.targetFrameTime))
+
+    def calculateDeltaTime(self):
+        # calculate deltaTime this frame
+        endTime = time.time()
+        self.deltaTime.calculate(endTime)
+        self.fixedDeltaTime.set(self.fixedDeltaTime.deltaTime + self.deltaTime.get())
+        # if self.deltaTime.get() > 0:
+        #     print("Main Environment Loop")
+        #     print("Fixed Start Time " + str(self.fixedDeltaTime.startTime))
+        #     print("fixed Deltatime " + str(self.fixedDeltaTime.deltaTime + self.deltaTime.deltaTime))
+        #     print("DeltaTime Start " + str(self.deltaTime.startTime))
+        #     print("DeltaTime " + str(self.deltaTime.get()))
+        #     print("EndTime " + str(endTime))
