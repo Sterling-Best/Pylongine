@@ -14,7 +14,7 @@ class Vector2D:
     def y(self):
         return self.vector[1]
 
-    def setY(self, a_newy: float):
+    def set_y(self, a_newy: float):
         self.vector[1] = a_newy
 
 

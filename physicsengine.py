@@ -18,8 +18,8 @@ class PhysicsEngine:
         self._initialized = True
         # "self" attributes for the singleton
 
-    def updatePhysics(self, a_targetcomponent: PhysicsComponent):
-        a_targetcomponent.position.setY(a_targetcomponent.position.y + 1)
+    def update_physics(self, a_target_component: PhysicsComponent):
+        a_target_component.position.set_y(a_target_component.position.y + 1)
 
 
 

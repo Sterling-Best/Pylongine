@@ -30,10 +30,10 @@ class PhysicsController:
         self.physicsPoolManager.createPool("default")
 
     def update_physics(self):
-        self.physicsPoolManager.iteratePools(self.physicsEngine.updatePhysics)
+        self.physicsPoolManager.iteratePools(self.physicsEngine.update_physics)
 
     def updateSpecificPhysics(self, a_physicsPoolName: str):
-        self.physicsPoolManager.iterateSpecificPool(self.physicsEngine.updatePhysics(), a_physicsPoolName)
+        self.physicsPoolManager.iterateSpecificPool(self.physicsEngine.update_physics(), a_physicsPoolName)
 
     def createComponent(self, x: float = 0, y: float = 0, a_poolname: str = "default") -> PhysicsComponent:
         return self.physicsPoolManager.requestCreateComponent(x, y, a_poolname)
