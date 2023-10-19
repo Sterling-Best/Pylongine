@@ -42,4 +42,4 @@ class PhysicsPoolManager:
         self.component_pools[a_pool_name].iterate_pool(a_callback)
 
     def request_create_component(self, x: float = 0, y: float = 0, a_pool_name ="Default") -> PhysicsComponent:
-        return self.component_pools[a_pool_name].create_component(x, y)
+        return self.component_pools[a_pool_name].create_component_return(x, y)

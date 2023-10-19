@@ -20,6 +20,3 @@ class PhysicsEngine:
 
     def update_physics(self, a_target_component: PhysicsComponent):
         a_target_component.position.set_y(a_target_component.position.y + 1)
-
-
-
