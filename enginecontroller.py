@@ -1,10 +1,9 @@
 import pygame
-import sys
 import time
 
 from deltaTime import DeltaTime
-from physicscontroller import PhysicsController
-from physicscomponent import PhysicsComponent
+from physicsengine.physicscontroller import PhysicsController
+from physicsengine.physicscomponent import PhysicsComponent
 
 class EngineController:
     """

@@ -1,5 +1,5 @@
-from physicscomponentpool import PhysicsComponentPool
-from physicscomponent import PhysicsComponent
+from physicsengine.physicscomponentpool import PhysicsComponentPool
+from physicsengine.physicscomponent import PhysicsComponent
 from typing import Callable
 
 class PhysicsPoolManager:
