@@ -13,7 +13,7 @@ class Scene(ABC):
     scene_name: str
 
     def __init__(self):
-        sceneobjectpool = SceneObjectPool()
+        self.scene_object_pool = SceneObjectPool()
 
     @abstractmethod
     def setup_scene(self):
@@ -22,5 +22,5 @@ class Scene(ABC):
     def add_object(self, arg_target_scene_object: SceneObject):
         self.scene_object_pool.add_object(arg_target_scene_object)
 
-    def remove_object(self):
-        pass
+    def remove_object(self, arg_target_scene_object: SceneObject):
+        self.scene_object_pool.remove_object(arg_target_scene_object)
