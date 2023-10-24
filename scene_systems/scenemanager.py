@@ -1,4 +1,5 @@
 from scene_systems.scene import Scene
+from scene_systems.scene_object_pool_manager import SceneObjectPoolManager
 
 class SceneManager:
 
@@ -19,6 +20,7 @@ class SceneManager:
 
     def load_scene(self, arg_scene_name: str):
         self.scene_pool[arg_scene_name].load_scene()
+
 
 
 
