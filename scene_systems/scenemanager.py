@@ -1,5 +1,4 @@
-from scene import Scene
-
+from scene_systems.scene import Scene
 
 class SceneManager:
 

@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
-from sceneobjectpool import SceneObjectPool
-from sceneobject import SceneObject
+from scene_systems.sceneobjectpool import SceneObjectPool
+from scene_systems.sceneobject import SceneObject
 class Scene(ABC):
     """
     Parent Class for a scene in python.
