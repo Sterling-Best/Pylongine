@@ -1,6 +1,6 @@
 from typing import Callable
 
-from physicsengine.physicscomponent import PhysicsComponent
+from physics_systems.physicscomponent import PhysicsComponent
 from vector2d import Vector2D
 
 class PhysicsComponentPool:

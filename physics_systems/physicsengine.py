@@ -1,4 +1,4 @@
-from physicsengine.physicscomponent import PhysicsComponent
+from physics_systems.physicscomponent import PhysicsComponent
 
 class PhysicsEngine:
 

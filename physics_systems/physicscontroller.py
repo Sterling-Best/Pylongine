@@ -1,7 +1,7 @@
-from physicsengine.physicsengine import PhysicsEngine
-from physicsengine.physicspoolmanager import PhysicsPoolManager
-from physicsengine.physicscomponentpool import PhysicsComponentPool
-from physicsengine.physicscomponent import PhysicsComponent
+from physics_systems.physicsengine import PhysicsEngine
+from physics_systems.physicspoolmanager import PhysicsPoolManager
+from physics_systems.physicscomponentpool import PhysicsComponentPool
+from physics_systems.physicscomponent import PhysicsComponent
 
 class PhysicsController:
 

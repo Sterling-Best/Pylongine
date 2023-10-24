@@ -2,8 +2,8 @@ import pygame
 import time
 
 from deltaTime import DeltaTime
-from physicsengine.physicscontroller import PhysicsController
-from physicsengine.physicscomponent import PhysicsComponent
+from physics_systems.physicscontroller import PhysicsController
+from physics_systems.physicscomponent import PhysicsComponent
 
 class EngineController:
     """
