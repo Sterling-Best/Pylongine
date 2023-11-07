@@ -4,6 +4,8 @@ class SceneObjectPoolManager:
 
     scene_object_pools: dict
 
+
+
     def __init__(self) -> None:
         self.scene_object_pools = {}
 
