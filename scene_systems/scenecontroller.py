@@ -1,5 +1,4 @@
 
-from scene_systems.scenesystemsfactory import SceneSystemsFactory
 from scene_systems.scenemanager import SceneManager
 from scene_systems.scene_object_pool_manager import SceneObjectPoolManager
 from typing import Callable
@@ -9,7 +8,6 @@ class SceneController:
 
     _instance = None
 
-    scene_systems: SceneSystemsFactory
     scene_manager: SceneManager
     scene_object_pool_manger: SceneObjectPoolManager
 
