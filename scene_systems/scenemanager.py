@@ -1,5 +1,5 @@
 from scene_systems.scene import Scene
-from scene_systems.scene_object_pool_manager import SceneObjectPoolManager
+from scene_systems.sceneobjectpoolmanager import SceneObjectPoolManager
 from typing import Callable
 
 
