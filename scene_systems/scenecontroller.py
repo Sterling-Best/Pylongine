@@ -23,7 +23,6 @@ class SceneController:
             return
         self._initialized = True
         # Initialize Factories and managers
-        self.scene_systems_factory = SceneSystemsFactory()
         self.scene_manager = self.scene_systems_factory.create_scene_manager()
         self.scene_object_pool_manger = self.scene_systems_factory.create_scene_object_pool_manager()
 
