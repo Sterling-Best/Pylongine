@@ -10,6 +10,6 @@ class SceneSystemsController:
     scene_object_controller: SceneObjectController
 
     def __init__(self):
-        scene_controller = SceneController()
-        scene_object_pool_controller = SceneObjectPoolController()
-        scene_object_controller = SceneObjectController()
+        self.scene_controller = SceneController()
+        self.scene_object_pool_controller = SceneObjectPoolController()
+        self.scene_object_controller = SceneObjectController()
