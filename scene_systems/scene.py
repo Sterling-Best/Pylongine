@@ -13,18 +13,16 @@ class Scene(ABC):
     scene_name: str
     scene_id: str
 
-    def __init__(self):
-        self.scene_object_pool = SceneObjectPool()
+    def __init__(self, arg_scene_id: str, arg_scene_name: str = None):
+        self.scene_id = arg_scene_id
+        if arg_scene_name == None:
+            self.scene_name = arg_scene_id
+        else:
+            self.scene_name = arg_scene_name
 
     @abstractmethod
     def setup_scene(self):
         pass
-
-    def add_object(self, arg_target_scene_object: SceneObject):
-        self.scene_object_pool.add_object(arg_target_scene_object)
-
-    def remove_object(self, arg_target_scene_object: SceneObject):
-        self.scene_object_pool.remove_object(arg_target_scene_object)
 
     def load_scene(self):
         pass
