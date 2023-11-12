@@ -11,6 +11,7 @@ class Scene(ABC):
     scene_object_pool: SceneObjectPool
 
     scene_name: str
+    scene_id: str
 
     def __init__(self):
         self.scene_object_pool = SceneObjectPool()

@@ -17,3 +17,9 @@ if __name__ == '__main__':
     engine_controller.run()
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
+# Todos
+
+# TODO: Finish Initial Scene Systems Implementation
+# TODO: Coordinate System - Flexible Datatypes (double, float, 1mm and super accurate precision)
+#
