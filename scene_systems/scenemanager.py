@@ -1,32 +1,34 @@
 from scene_systems.scene import Scene
-from scene_systems.sceneobjectpoolmanager import SceneObjectPoolManager
-from typing import Callable
 
 
 class SceneManager:
 
+    # TODO: should the active scene be in manager or repository?
     # Class Variables
-    current_scene: Scene
-    scene_pool = dict
+    active_scene_ids: list[str]
 
     def __init__(self):
-        self.scene_pool = {}
+        pass
 
-    def new_scene(self, arg_scene_name: str) -> None:
-        self.scene_pool[arg_scene_name] = Scene()
+    def activate_scene(self, arg_scene_id: str) -> None:
+        self.active_scene_ids.append(arg_scene_id)
 
-    def get_scene(self, arg_scene_name: str) -> Scene:
-        return self.scene_pool[arg_scene_name]
+    def deactive_scene(self, arg_scene_id: str) -> None:
+        if self.check_active_scenes(arg_scene_id):
+            self.active_scene_ids.remove(arg_scene_id)
+        else:
+            raise ValueError(f"Scene by that id was not found: ID: {arg_scene_id}")
 
-    def get_current_scene(self) -> Scene:
-        return self.current_scene
+    def get_active_scenes(self) -> list[str]:
+        return self.active_scene_ids
 
-    def remove_scene(self, arg_scene_name: str) -> None:
-        self.scene_pool.pop(arg_scene_name)
+    def check_active_scenes(self, arg_scene_id: str) -> bool:
+        return arg_scene_id in self.active_scene_ids
 
-    def load_scene(self, arg_scene_name: str) -> None:
-        self.current_scene = self.scene_pool[arg_scene_name]
-        self.current_scene.load_scene()
+    def rename_scene(self, arg_target_scene: Scene, arg_scene_name) -> None:
+        arg_target_scene.change_scene_name(arg_scene_name)
+
+
 
 
 
