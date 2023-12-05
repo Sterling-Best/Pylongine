@@ -1,11 +1,18 @@
 from abc import ABC, abstractmethod
 
+
 class SceneObject(ABC):
 
     active = True
 
-    def __init__(self):
+    position_X: float
+    position_Y: float
+
+    component_directory: dict
+
+    def __init__(self, arg_pos_x: float = 0, arg_pos_y: float = 0):
         self.active = True
+        self.component_directory = {}
 
     def initialize(self):
         pass

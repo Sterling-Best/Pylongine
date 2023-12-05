@@ -3,6 +3,7 @@ from typing import Callable
 from physics_systems.physicscomponent import PhysicsComponent
 from vector2d import Vector2D
 
+
 class PhysicsComponentPool:
 
     pool: list = []
@@ -29,7 +30,7 @@ class PhysicsComponentPool:
         self.pool.pop()
 
     def create_component_return(self, x: float = 0, y: float = 0) -> None:
-        new_component = PhysicsComponent(Vector2D([x, y]))
+        new_component = PhysicsComponent(Vector2D(x, y))
         self.add_component(new_component)
         return new_component
 
