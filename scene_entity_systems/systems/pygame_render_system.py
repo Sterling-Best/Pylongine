@@ -1,14 +1,14 @@
 from scene_entity_systems.components import PygameRenderComponent
-from scene_entity_systems.components import PositionComponent, PositionComponentController
+from scene_entity_systems.components import PositionComponent, ComponentController
 from scene_entity_systems.systems import PositionSystem
 import pygame
 
 
 class PygameRenderSystem:
 
-    position_component_controller: PositionComponentController
+    position_component_controller: ComponentController
 
-    def __init__(self, arg_position_component_controller: PositionComponentController) -> None:
+    def __init__(self, arg_position_component_controller: ComponentController) -> None:
         pygame.init()
         self.position_component_controller = arg_position_component_controller
         self.width, self.height = 1280, 720

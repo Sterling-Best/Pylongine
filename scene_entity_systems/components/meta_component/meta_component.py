@@ -1,4 +1,4 @@
-from scene_entity_systems.components.component import Component
+from scene_entity_systems.components import Component
 
 
 class MetaComponent(Component):

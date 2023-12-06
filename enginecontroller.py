@@ -1,12 +1,12 @@
-import pygame
 import time
 
 from deltaTime import DeltaTime
 
-from scene_entity_systems.components import MetaComponentController
-from scene_entity_systems.components import PhysicsComponentController
-from scene_entity_systems.components import PositionComponentController
-from scene_entity_systems.components import PygameRenderComponentController
+from scene_entity_systems.components import ComponentController
+from scene_entity_systems.components.meta_component import MetaComponentFactory
+from scene_entity_systems.components.physics_component import PhysicsComponentFactory
+from scene_entity_systems.components.position_component import PositionComponentFactory
+from scene_entity_systems.components.pygame_render_component import PygameRenderComponentFactory
 from scene_entity_systems.systems import PhysicsSystem
 from scene_entity_systems.systems import PositionSystem
 from scene_entity_systems.systems import PygameRenderSystem
@@ -45,15 +45,15 @@ class EngineController:
     delta_time: DeltaTime
     fixed_delta_time: DeltaTime
 
-    meta_component_controller: MetaComponentController
-    physics_component_controller: PhysicsComponentController
+    meta_component_controller: ComponentController
+    physics_component_controller: ComponentController
+    position_component_controller: ComponentController
+    pygame_render_component_controller: ComponentController
     physics_system: PhysicsSystem
-    position_component_controller: PositionComponentController
     position_system: PositionSystem
-    pygame_render_component_controller: PygameRenderComponentController
     pygame_render_system: PygameRenderSystem
 
-    target_frame_rate: int = 120
+    target_frame_rate: int = 60
 
     def __init__(self):
         self.running = False
@@ -64,10 +64,10 @@ class EngineController:
         self.target_frame_time = 1 / self.target_frame_rate
 
         # Initialize Component Controller Classes
-        self.meta_component_controller = MetaComponentController()
-        self.physics_component_controller = PhysicsComponentController()
-        self.position_component_controller = PositionComponentController()
-        self.pygame_render_component_controller = PygameRenderComponentController()
+        self.meta_component_controller = ComponentController(MetaComponentFactory())
+        self.physics_component_controller = ComponentController(PhysicsComponentFactory())
+        self.position_component_controller = ComponentController(PositionComponentFactory())
+        self.pygame_render_component_controller = ComponentController(PygameRenderComponentFactory())
 
         # Initialize Component System Classes
         self.physics_system = PhysicsSystem(self.position_component_controller, self.fixed_delta_time)
@@ -84,19 +84,13 @@ class EngineController:
         self.start()
         # Environment Running Loop
         while self.running:
-            # Start loop
-            self.start_delta_time()  # Always get time at start of loop
-            # Environment Loop Main logic
+            self.start_update()
             self.update()
-            # Fixed
-            while self.fixed_delta_time.get() >= self.target_frame_time:
-                self.fixed_update()
-                self.fixed_delta_time.set(self.fixed_delta_time.get() - self.target_frame_time)
+            self.fixed_update()
             self.late_update()
             self.render_update()
-            # End Loop
-            self.calculate_delta_time()  # Always calculate delta_time at end of loop
-        # Exit Environment
+            self.end_update()
+        # Environment End
         self.end()
 
     def initialize(self):
@@ -105,17 +99,22 @@ class EngineController:
 
     def start(self) -> None:
         for i in range(3):
-            target_entity_id = self.meta_component_controller.create_meta_component()
-            self.physics_component_controller.create_component(target_entity_id)
-            self.position_component_controller.create_component(target_entity_id)
-            self.pygame_render_component_controller.create_component(target_entity_id)
-            self.physics_component_controller.iterate_single_component(self.physics_system.apply_force, target_entity_id, Vector2D(random.random() * 1000, 0))
+            self.meta_component_controller.create_component(i)
+            self.physics_component_controller.create_component(i)
+            self.position_component_controller.create_component(i)
+            self.pygame_render_component_controller.create_component(i)
+            self.physics_component_controller.iterate_single_component(self.physics_system.apply_force, i, Vector2D(random.random() * 1000, 0))
+
+    def start_update(self):
+        self.start_delta_time()
 
     def update(self):
         pass
 
     def fixed_update(self):
-        self.physics_component_controller.iterate_components(self.physics_system.update_physics)
+        while self.fixed_delta_time.get() >= self.target_frame_time:
+            self.physics_component_controller.iterate_components(self.physics_system.update_physics)
+            self.fixed_delta_time.set(self.fixed_delta_time.get() - self.target_frame_time)
 
     def late_update(self):
         self.position_component_controller.iterate_components(self.position_system.update_position)
@@ -124,6 +123,9 @@ class EngineController:
         self.pygame_render_system.render_background()
         self.pygame_render_component_controller.iterate_components(self.pygame_render_system.render_circle)
         self.pygame_render_system.render_end()
+
+    def end_update(self):
+        self.calculate_delta_time()
 
     def end(self):
         pass

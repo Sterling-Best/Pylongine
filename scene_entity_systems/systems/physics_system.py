@@ -1,7 +1,6 @@
 import random
 
-from scene_entity_systems.components import PhysicsComponent, PhysicsComponentController
-from scene_entity_systems.components import PositionComponent, PositionComponentController
+from scene_entity_systems.components import PhysicsComponent, ComponentController, PositionComponent
 from vector2d import Vector2D
 from deltaTime import DeltaTime
 from random import Random
@@ -9,12 +8,12 @@ from random import Random
 
 class PhysicsSystem:
 
-    position_component_controller: PositionComponentController
+    position_component_controller: ComponentController
     delta_time: DeltaTime
 
     gravity: float = 9.8
 
-    def __init__(self, arg_position_component_controller: PositionComponentController, arg_fixed_delta_time: DeltaTime):
+    def __init__(self, arg_position_component_controller: ComponentController, arg_fixed_delta_time: DeltaTime):
         self.position_component_controller = arg_position_component_controller
         self.delta_time = arg_fixed_delta_time
 

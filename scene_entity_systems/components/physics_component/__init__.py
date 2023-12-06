@@ -1,0 +1,2 @@
+from scene_entity_systems.components.physics_component.physics_component import PhysicsComponent
+from scene_entity_systems.components.physics_component.physics_component_factory import PhysicsComponentFactory

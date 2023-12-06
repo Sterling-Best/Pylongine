@@ -12,9 +12,10 @@ class ComponentController(ABC):
     component_repository: ComponentRepository
     component_manager: ComponentManager
 
-    @abstractmethod
-    def __init__(self):
-        pass
+    def __init__(self, arg_component_factory: ComponentFactory):
+        self.component_factory = arg_component_factory
+        self.component_repository = ComponentRepository()
+        self.component_manager = ComponentManager()
 
     def create_component(self, arg_entity_id: int) -> None:
         target_component = self.component_factory.create_component(arg_entity_id)

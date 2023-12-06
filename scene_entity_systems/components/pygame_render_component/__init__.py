@@ -1,0 +1,2 @@
+from scene_entity_systems.components.pygame_render_component.pygame_render_component import PygameRenderComponent
+from scene_entity_systems.components.pygame_render_component.pygame_render_component_factory import PygameRenderComponentFactory
